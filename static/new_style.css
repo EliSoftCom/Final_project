@@ -1,0 +1,328 @@
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+body {
+    min-width: 320px;
+    font-family: "Calibri", sans-serif;
+}
+
+.container {
+    max-width: 1300px;
+    width: 90%;
+    padding: 1rem 0px 0;
+    margin: 0 auto;
+}
+
+/* ===== Menu-f ===== */
+body {
+    overflow-x:  hidden;
+}
+nav {
+    margin: 0 auto;
+    max-width: 1270px;
+    width: 100%;
+}
+#checkbox-menu, .toggle, #checkbox-menu-footer {
+    display: none;
+}
+.menu {
+    padding: 0;
+    margin: 0;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    list-style-type: none;
+    border: 2px solid #125884;
+}
+.menu li a {
+    text-decoration: none;
+    align-self: center;
+    color: #125884;
+    font-size: 15px;
+    padding: 10px 29px;
+    transition: background 0.2s linear;
+}
+.footer .menu li a {
+    text-decoration: none;
+    align-self: center;
+    color: #125884;
+    font-size: 15px;
+    padding: 10px 78px;
+    transition: background 0.2s linear;
+}
+.menu li a:hover {
+    background: #125884;
+    color: #ffffff;
+}
+
+/* ===== /Menu-f ===== */
+
+h1, h2, h3, h4, h5, h6 {
+    color: #08508A;
+}
+
+h2, h3, h4, h5, h6 {
+    text-indent: 2.5rem;
+    margin-top: 20px;
+}
+
+h2 {
+    padding: .5rem 0rem 1rem;
+	font-size: 1.5rem;
+    font-weight: 800;
+    padding-top: 1rem;
+}
+
+h3 {
+    padding: .5rem 0rem 0rem;
+	font-size: 1.25rem;
+	font-weight: 500;
+	text-decoration: underline;
+}
+h4 {
+    padding: .5rem 0rem 0rem;
+    font-size: 1.15rem;
+    font-weight: 400;
+    text-decoration: underline;
+}
+h5 {
+    padding: .5rem 0rem 0rem;
+    font-size: 1.05rem;
+    font-weight: 300;
+    text-decoration: underline;
+}
+h6 {
+    padding: .5rem 0rem 0rem;
+    font-size: 0.95rem;
+    font-weight: 300;
+    text-decoration: underline;
+}
+.article__nav ul li a {
+    text-decoration: none;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+.article__nav ul li a h4 {
+    margin-top: 0px;
+}
+.article__nav ul li a h5 {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+figure p {
+    text-align: center;
+}
+.form-left {
+    display: flex;
+    padding-left: 40px;
+    font-size: 1.25rem;
+}
+.form-left img {
+    padding-right: 5px;
+}
+.article__nav ul li ul li, .article__nav ul li {
+    list-style: none;
+}
+.article__nav ul li ul li a h6 {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+.article__nav ul li ol li a h5 {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+p {
+	font-size: 16px;
+    text-align: justify;
+    text-indent: 2.5rem;
+    margin: .5rem 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+figcaption {
+    font-size: 1.25rem;
+    text-align: center;
+    padding: 0 10%;
+}
+
+ul.article__list,
+ol.article__list {
+    font-size: 16px;
+    padding-left: 5rem;
+}
+
+ul.article__list {
+    list-style-type: "- ";
+}
+
+ol.article__list {
+    list-style-type: decimal;
+}
+
+.link__go-back {
+    display: block;
+    text-decoration: none;
+    color: #125884;
+    font-size: 1rem;
+    padding: .5rem;
+    border: 2px solid #125884;
+    font-weight: 500; }
+    .link__go-back:hover {
+        text-decoration: underline;
+    }
+
+.article {
+    padding: 1rem 0; }
+
+.article__title-h1 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 800;
+}
+
+.article__image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.article__formula {
+    margin: 0 auto;
+}
+
+.article__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.article__table caption {
+    font-size: 1.25rem;
+    margin-bottom: .5rem;
+}
+td img {
+    margin: auto;
+    width: 60%;
+}
+td .article__image img {
+    width: auto;
+}
+.article__table th,
+.article__table td {
+    border: 1px solid #000;
+    text-align: center;
+    padding: 0.25rem;
+}
+
+@media all and (max-width: 800px) {
+    header img{
+        width: 100%;
+    }
+    .article__table p {
+        text-align: center;
+        font-size: 2vw;
+    }
+    p {
+        text-indent: 0rem;
+        margin: .3rem 0;
+    }
+    h2, h3, h4, h5, h6, h7 {
+        text-indent: 0rem;
+    }
+    .article__title-h1 {
+        font-size: 20px;
+    }
+    ul.article__list {
+        padding-left: 0px;
+    }
+    ol.article__list {
+        padding-left: 20px;
+    }
+    .title {
+        padding-right: 47px;
+        font-size: 16px;
+    }
+    .row {
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
+    ul {
+        padding-inline-start: 10px;
+    }
+    .article__table {
+        font-size: 2vw;
+    }
+
+    /* ===== Menu-f ===== */
+    .toggle {
+        clear: both;
+        display: block;
+        text-align: center;
+        font-size: 40px;
+        line-height: 40px;
+        width: 100%;
+        color: #ffffff;
+        transition: all .1s linear;
+        background: #125884;
+    }
+    .toggle:hover {
+        background: #125884;
+    }
+    #checkbox-menu:checked + label .touch li {
+        opacity: 1;
+        visibility: visible;
+        transition: all .7s linear;
+    }
+    #checkbox-menu:checked + label .touch {
+        height: 350px;
+    }
+    .menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        height: 0;
+        transition: height .3s linear;
+        border: 0px solid;
+    }
+    .footer .menu {
+        height: 220px;
+    }
+    .menu li {
+        display: flex;
+        align-self: center;
+        width: 100%;
+        opacity: 0;
+        visibility: hidden;
+    }
+    .footer .menu li {
+        opacity: 1;
+        visibility: visible;
+    }
+    .menu li a {
+        width: 100%;
+        text-align: center;
+        align-self: center;
+        align-content: center;
+        padding: 10px;
+    }
+    /* ===== /Menu-f ===== */
+
+    .wrapper-style {
+        width: 100%;
+    }
+    .box, .box2, .box3 {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .box p, .box2 p, .box3 p {
+        text-align: left;
+    }
+}

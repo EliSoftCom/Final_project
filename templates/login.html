@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{the_title}}</h2>
+<form method="POST" action="/result">
+    <table>
+        <p>Пройтите регистрацию</p>
+        <tr>
+            <td>User_name</td>
+            <td><input name="User_name" type="TEXT" width="60"></td>
+        </tr>
+        <tr>
+            <td>Login</td>
+            <td><input name="Login" type="TEXT"></td>
+        </tr>
+    </table>>
+    <p>После ввода нажмите "Отправить"</p>
+    <p><input value="Отправить" type="SUBMIT"></p>
+</form>
+{% endblock %}
