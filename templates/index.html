@@ -12,9 +12,20 @@
     <br>
     <h3 align="center">Приветствуем на нашем сайте по поиску объявлений</h3>
     <h4 align="center">Как это работает?</h4>
+    <h4 align="center">Приложение по заданным фильтрам мониторит сайты и высылает Вам уведомления в Telegram или другим доступным способом.</h4>
+    <br>
     <div class="row">
-        <div class="col-12">
-        <h4>Приложение по заданным фильтрам мониторит сайт Авито и высылает Вам уведомления в Telegram или другим доступным способом.</h4>
+        <div class="col-4">
+        <h4>Например, парсинг сайта Drom:</h4>
+        </div>
+        <div class="col-8">
+          {% for data in data_parser %}
+          <h4><a href="{{ data.url }}">{{ data.name }}</a></h4>
+          <h5>{{ data.description }}</h5>
+          <h6>{{ data.price }} руб.</h6>
+          <hr />
+          
+          {% endfor %}
         </div>
     </div>
     </div>
