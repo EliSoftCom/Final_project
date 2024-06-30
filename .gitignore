@@ -156,6 +156,7 @@ cython_debug/
 
 webapp/config.py
 *.db
+.vscode/
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
