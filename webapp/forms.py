@@ -15,5 +15,3 @@ class AddParsingForm(FlaskForm):
     polling_interval = IntegerField('Интервал опроса (сек.)', validators=[DataRequired()], 
                     render_kw={"class":"form-control"})
     submit = SubmitField('Отправить!', render_kw={"class":"btn btn-primary"})
-
-    
