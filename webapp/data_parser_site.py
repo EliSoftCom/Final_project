@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-import config
+from webapp import config
 
 def get_html(url):
     try:
