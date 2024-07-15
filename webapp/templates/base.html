@@ -24,7 +24,7 @@
               <a class="nav-link" href="#">О НАС</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="#">ПАРСЕР</a>
+              <a class="nav-link " href="{{ url_for('add_parsing') }}">ПАРСЕР</a>
             </li>
             <li class="nav-item">
               {% if current_user.is_anonymous %}

@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-from webapp import config
 
 def get_html(url):
     try:
@@ -18,8 +17,8 @@ def all_data_parser_from_drom(html):
         return all_data
     return False
 
-def get_data_in_dict_from_drom():
-    html = get_html(config.DATASET_URL)
+def get_data_in_dict_from_drom(dataset_url):
+    html = get_html(dataset_url)
     result_data = []
     for data in all_data_parser_from_drom(html):
         if data.find('div', class_='css-16kqa8y e3f4v4l2'):

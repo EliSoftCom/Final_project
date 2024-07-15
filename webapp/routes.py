@@ -7,6 +7,8 @@ import sqlalchemy as sa
 from webapp import db
 from webapp.models import User
 from webapp.forms import RegistrationForm
+from webapp.forms import AddParsingForm
+from webapp.data_parser_site import get_data_in_dict_from_drom
 
 
 @app.route('/')
@@ -53,3 +55,24 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+
+@app.route('/add_parsing', methods = ['GET', 'POST'])
+@login_required
+def add_parsing():
+    form = AddParsingForm()
+    if form.validate_on_submit():
+        url_to_the_category, notification_email, polling_interval = form.url_to_the_category.data, form.notification_email.data, form.polling_interval.data
+        data_parser = { 'name': "ihujgui",
+                'url': "fuygjhug",
+                'price': 654564654,
+                'description': "ohuyg7g6rguihu",
+                'date_of_announcement': "jhguyfytygftt"}
+        #data_parser = get_data_in_dict_from_drom(url_to_the_category)
+        #return render_template('get_data_site.html', data_parser=data_parser)
+        #request_parser = Parser(url_to_the_category, notification_email, polling_interval)
+        #db.session.add(request_parser)
+        #db.session.commit()
+        return render_template('get_data_site.html', data_parser=data_parser)
+    return render_template('add_parsing.html', form=form)
+
