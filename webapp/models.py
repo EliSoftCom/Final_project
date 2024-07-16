@@ -1,29 +1,42 @@
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy import String
+from datetime import datetime, timezone
+from typing import Optional
+import sqlalchemy as sa
+import sqlalchemy.orm as so
+from webapp import db
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
+from webapp import login
 
-class Base(DeclarativeBase):
-  pass
 
-db = SQLAlchemy(model_class=Base)
+class User(UserMixin, db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
+    email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True, unique=True)
+    password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
+    querys: so.WriteOnlyMapped['Query'] = so.relationship(back_populates='author') 
 
-class Parser(db.Model):
-    __tablename__='parsing'
-    id: Mapped[int] = mapped_column(primary_key=True)
-    url_to_the_category: Mapped[str] = mapped_column(index=True, unique=True)
-    notification_email: Mapped[str] = mapped_column(String(30), index=True)
-    polling_interval: Mapped[int] = mapped_column()
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
 
-    def __init__(self, url_to_the_category, notification_email, polling_interval):
-        self.url_to_the_category =  url_to_the_category
-        self.notification_email = notification_email
-        self.polling_interval = polling_interval
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return 'URL {}, Email {}, Интервал опроса {}, id {}'.format(self.url_to_the_category, 
-                                                                    self.notification_email, 
-                                                                    self.polling_interval,
-                                                                    self.id)
+        return '<User {}>'.format(self.username)
+    
+
+class Query(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    body: so.Mapped[str] = so.mapped_column(sa.String(256))
+    timestamp: so.Mapped[datetime] = so.mapped_column(index=True, default=lambda: datetime.now(timezone.utc))
+    user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id), index=True)
+    author: so.Mapped[User] = so.relationship(back_populates='querys')
+
+    def __repr__(self):
+        return '<Query {}>'.format(self.body)
+    
+
+    @login.user_loader
+    def load_user(id):
+        return db.session.get(User, int(id))
     
