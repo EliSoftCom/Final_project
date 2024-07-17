@@ -8,7 +8,8 @@
   </head>
   <body>
     <h6 align="right"><a href="{{ url_for('index') }}">Главная страница</a>
-    <a href="{{ url_for('get_data_site') }}">Парсинг</a></h6>
+    <a href="{{ url_for('get_data_site') }}">Результат парсинга</a>
+    <a href="{{ url_for('add_parsing') }}">Запрос на парсинг</a></h6>
     <div class="container">
     <h3 align="center">Парсинг сайта Drom</h3>
     <br>
@@ -16,11 +17,10 @@
         <div class="col-4">
         </div>
         <div class="col-8">
-          {% for data in data_parser %}
+          {% for data in result_parsing %}
           <h4><a href="{{ data.url }}">{{ data.name }}</a></h4>
           <h5>{{ data.description }}</h5>
-          <h5>{{ data.date_of_announcement }}</h5>
-          <h6>{{ data.price }} руб.</h6>
+          <h6>{{ data.price }}</h6>
           <hr />
           {% endfor %}
         </div>

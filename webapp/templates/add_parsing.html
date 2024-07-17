@@ -8,6 +8,9 @@
     <title>{{ page_title }}</title>
   </head>
   <body>
+    <h6 align="right"><a href="{{ url_for('index') }}">Главная страница</a>
+    <a href="{{ url_for('get_data_site') }}">Результат парсинга</a>
+    <a href="{{ url_for('add_parsing') }}">Запрос на парсинг</a></h6>
     <div class="container">
     <h3 align="center">{{ page_title }}</h3>
     <div class="row">
