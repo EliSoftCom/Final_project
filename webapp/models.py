@@ -43,7 +43,6 @@ class User(db.Model, UserMixin):
     
     @property
     def is_admin(self):
-        print(self.role)
         return self.role == 'admin'
 
     def __repr__(self):
@@ -56,7 +55,7 @@ class ResultParser(db.Model):
     name: Mapped[str] = mapped_column(String(30), index=True)
     url: Mapped[str] = mapped_column(index=True, unique=True)
     price: Mapped[int] = mapped_column(index=True)
-    description: Mapped[str] = mapped_column(String, index=True)
+    description: Mapped[str] = mapped_column(String)
 
     def __repr__(self):
         return '<Name {}, price {}, id {}>'.format(self.name, self.price, self.id) 

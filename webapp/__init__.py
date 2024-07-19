@@ -2,7 +2,6 @@ from flask import Flask, flash, redirect, url_for
 from flask import render_template
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
-from webapp.decorators import user_required
 from webapp.forms import AddParsingForm
 from webapp.models import db, Parser, User, ResultParser
 from webapp.forms import LoginForm
@@ -29,7 +28,7 @@ def create_app():
 
     # добавляет в БД критерии поиска, введенные пользователем
     @app.route('/add_parsing', methods = ['GET', 'POST'])
-    @user_required
+    @login_required
     def add_parsing():  
         title = 'Парсинг'
         parsing = AddParsingForm()
@@ -44,6 +43,7 @@ def create_app():
     
 
     @app.route('/get_data_site')
+    @login_required
     def get_data_site():
         title = 'Результат парсинга'
         result_parsing = ResultParser.query.all()
