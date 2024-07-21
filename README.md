@@ -19,6 +19,7 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, '..', 'data_parser.db')
 SECRET_KEY = "Ваш секретный ключ"
+DATASET_URL = 'https://auto.drom.ru/mitsubishi/outlander/'
 ```
 
 ## Запуск программы
@@ -30,6 +31,11 @@ export FLASK_APP=webapp && export FLASK_ENV=development && flask run
 ```
 
 Windows:
+```
+run.bat
+```
+или 
+
 ```
 set FLASK_APP=webapp && set FLASK_ENV=development && set FLASK_DEBUG=1 && flask run
 ```
@@ -45,3 +51,4 @@ Windows:
 ```
 python create_db.py
 ```
+Для добавления данных результата парсинга в БД запустите файл `get_all_data.py`.
