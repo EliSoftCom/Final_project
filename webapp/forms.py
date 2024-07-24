@@ -6,18 +6,18 @@ from webapp import db
 from webapp.models import User
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
+    username = StringField('Username', validators=[DataRequired()], render_kw={"class": "form-control"})
+    password = PasswordField('Password', validators=[DataRequired()], render_kw={"class": "form-control"})
+    remember_me = BooleanField('Remember Me', default=True, render_kw={"class": "form-check-input"})
+    submit = SubmitField('Sign In', render_kw={"class": "btn btn-primary"})
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Register')
+    username = StringField('Username', validators=[DataRequired()], render_kw={"class": "form-control"})
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"class": "form-control"})
+    password = PasswordField('Password', validators=[DataRequired()], render_kw={"class": "form-control"})
+    password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')], render_kw={"class": "form-control"})
+    submit = SubmitField('Register', render_kw={"class": "btn btn-primary"})
 
     def validate_username(self, username):
         user = db.session.scalar(sa.select(User).where(User.username == username.data))
@@ -42,4 +42,3 @@ class AddParsingForm(FlaskForm):
     polling_interval = IntegerField('Интервал опроса (сек.)', validators=[DataRequired()], 
                     render_kw={"class":"form-control"})
     submit = SubmitField('Отправить!', render_kw={"class":"btn btn-primary"})
-    
