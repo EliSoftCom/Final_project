@@ -8,6 +8,7 @@ from webapp import db
 from webapp.models import User, Parser, ResultParser
 from webapp.forms import RegistrationForm
 from webapp.forms import AddParsingForm
+from webapp.data_parser_site import get_data_from_drom
 
 
 @app.route('/')
@@ -63,10 +64,16 @@ def add_parsing():
     title = 'Парсинг'
     parsing = AddParsingForm()
     if parsing.validate_on_submit():
-        url_to_the_category, notification_email, polling_interval = parsing.url_to_the_category.data, parsing.notification_email.data, parsing.polling_interval.data
-        request_parser = Parser(url_to_the_category, notification_email, polling_interval)
+        query = sa.select(Parser)
+        parsers = db.session.scalars(query)
+        for p in parsers:
+            if parsing.url_to_the_category.data == p.url_to_the_category:
+                 flash('Url c таким адресом уже были')
+                 return redirect(url_for('add_parsing'))
+        request_parser = Parser(url_to_the_category = parsing.url_to_the_category.data, notification_email = parsing.notification_email.data, polling_interval = parsing.polling_interval.data, author = current_user)
         db.session.add(request_parser)
         db.session.commit()
+        get_data_from_drom(parsing.url_to_the_category.data)
         flash('Вы успешно добавили категорию поиска')
         return redirect(url_for('get_data_site'))
     return render_template('add_parsing.html', page_title=title, form=parsing)

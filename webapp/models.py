@@ -13,7 +13,7 @@ class User(UserMixin, db.Model):
     username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
     email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True, unique=True)
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
-    querys: so.WriteOnlyMapped['Query'] = so.relationship(back_populates='author') 
+    parser: so.WriteOnlyMapped['Parser'] = so.relationship(back_populates='author') 
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -27,19 +27,8 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User name={} id={}>'.format(self.username, self.id)
+
     
-
-class Query(db.Model):
-    id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    body: so.Mapped[str] = so.mapped_column(sa.String(256))
-    timestamp: so.Mapped[datetime] = so.mapped_column(index=True, default=lambda: datetime.now(timezone.utc))
-    user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id), index=True)
-    author: so.Mapped[User] = so.relationship(back_populates='querys')
-
-    def __repr__(self):
-        return '<Query {}>'.format(self.body)
-    
-
     @login.user_loader
     def load_user(id):
         return db.session.get(User, int(id))
@@ -51,11 +40,8 @@ class Parser(db.Model):
     url_to_the_category: so.Mapped[str] = so.mapped_column(index=True, unique=True)
     notification_email: so.Mapped[str] = so.mapped_column(sa.String(30), index=True)
     polling_interval: so.Mapped[int] = so.mapped_column()
-
-    def __init__(self, url_to_the_category, notification_email, polling_interval):
-        self.url_to_the_category =  url_to_the_category
-        self.notification_email = notification_email
-        self.polling_interval = polling_interval
+    user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),index=True)
+    author: so.Mapped[User] = so.relationship(back_populates='parser') 
 
     def __repr__(self):
         return '<URL {}, Email {}, Интервал опроса {}, id {}>'.format(self.url_to_the_category, self.notification_email, 
