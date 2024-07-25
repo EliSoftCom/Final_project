@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-from webapp.config import Config
+from webapp import config
 from webapp.models import db, ResultParser
 
 
@@ -16,7 +16,7 @@ def get_html(url):
         print('Сетевая ошибка')
         return False
 
-# собирает все данные 1 страницы сайта с лимитом - первые 10
+# собирает все данные 1 страницы сайта с лимитом - первые 5
 def all_data_parser_from_drom(html):
     if html:
         soup = BeautifulSoup(html, 'html.parser')
@@ -24,9 +24,8 @@ def all_data_parser_from_drom(html):
         return all_data
     return False
 
-
 def get_data_from_drom():
-    html = get_html(Config.DATASET_URL)
+    html = get_html(config.DATASET_URL)
     for data in all_data_parser_from_drom(html):
         if data.find('h3', class_='css-16kqa8y'):
             name = data.find('h3', class_='css-16kqa8y').contents[0]
