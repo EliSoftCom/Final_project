@@ -73,7 +73,11 @@ def add_parsing():
         request_parser = Parser(url_to_the_category = parsing.url_to_the_category.data, notification_email = parsing.notification_email.data, polling_interval = parsing.polling_interval.data, author = current_user)
         db.session.add(request_parser)
         db.session.commit()
-        get_data_from_drom(parsing.url_to_the_category.data)
+        user_now =User.query.get(current_user.id)
+        querys = user_now.parser.select()
+        parser_user = db.session.scalars(querys).all()
+        parser_id = parser_user[-1].id
+        get_data_from_drom(parsing.url_to_the_category.data, current_user.id, parser_id)
         flash('Вы успешно добавили категорию поиска')
         return redirect(url_for('get_data_site'))
     return render_template('add_parsing.html', page_title=title, form=parsing)

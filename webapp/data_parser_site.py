@@ -25,7 +25,7 @@ def all_data_parser_from_drom(html):
     return False
 
 
-def get_data_from_drom(url_find):
+def get_data_from_drom(url_find, user_id, parser_id):
     html = get_html(url_find)
     for data in all_data_parser_from_drom(html):
         if data.find('h3', class_='css-16kqa8y'):
@@ -34,13 +34,13 @@ def get_data_from_drom(url_find):
             price = data.find('div', class_='css-1dkhqyq').get_text(' ')
             description = data.find('div', class_='css-jlnpz8')\
             .find('div', class_='css-1fe6w6s').get_text()
-            save_data_parser(name, url, price, description)
+            save_data_parser(name, url, price, description, user_id, parser_id)
 
 
-def save_data_parser(name, url, price, description):
+def save_data_parser(name, url, price, description, user_id, parser_id):
     data_exists = ResultParser.query.filter(ResultParser.url == url).count()
     if not data_exists:
-        data_parser = ResultParser(name=name, url=url, price=price, description=description)
+        data_parser = ResultParser(name=name, url=url, price=price, description=description, user_id=user_id, parser_id=parser_id)
         db.session.add(data_parser)
         db.session.commit()
    

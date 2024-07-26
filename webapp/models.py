@@ -13,7 +13,8 @@ class User(UserMixin, db.Model):
     username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
     email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True, unique=True)
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
-    parser: so.WriteOnlyMapped['Parser'] = so.relationship(back_populates='author') 
+    parser: so.WriteOnlyMapped['Parser'] = so.relationship(back_populates='author')
+    resultparser: so.WriteOnlyMapped['ResultParser'] = so.relationship(back_populates='url_parser')  
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -41,7 +42,8 @@ class Parser(db.Model):
     notification_email: so.Mapped[str] = so.mapped_column(sa.String(30), index=True)
     polling_interval: so.Mapped[int] = so.mapped_column()
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),index=True)
-    author: so.Mapped[User] = so.relationship(back_populates='parser') 
+    author: so.Mapped[User] = so.relationship(back_populates='parser')
+    resultparser1: so.WriteOnlyMapped['ResultParser'] = so.relationship(back_populates='url_parser1') 
 
     def __repr__(self):
         return '<URL {}, Email {}, Интервал опроса {}, id {}>'.format(self.url_to_the_category, self.notification_email, 
@@ -55,6 +57,11 @@ class ResultParser(db.Model):
     url: so.Mapped[str] = so.mapped_column(index=True, unique=True)
     price: so.Mapped[int] = so.mapped_column(index=True)
     description: so.Mapped[str] = so.mapped_column(sa.String)
+    user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),index=True)
+    url_parser: so.Mapped[User] = so.relationship(back_populates='resultparser')
+    parser_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Parser.id),index=True)
+    url_parser1: so.Mapped[Parser] = so.relationship(back_populates='resultparser1') 
+
 
     def __repr__(self):
         return '<Name {}, price {}, id {}>'.format(self.name, self.price, self.id)
