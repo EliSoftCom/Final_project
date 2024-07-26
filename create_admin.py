@@ -2,10 +2,10 @@ from getpass import getpass
 import sys
 
 from webapp import create_app
-from webapp.models import db, User
+from webapp.db import db
+from webapp.models import User
 
 app = create_app()
-
 with app.app_context():
     username = input('Введите имя:')
 

@@ -19,7 +19,7 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, '..', 'data_parser.db')
-    SECRET_KEY = "Ваш секретный ключ"
+    SECRET_KEY = "Your secret key"
     DATASET_URL = 'https://auto.drom.ru/mitsubishi/outlander/'
 ```
 

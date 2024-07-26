@@ -16,14 +16,13 @@ def get_html(url):
         print('Сетевая ошибка')
         return False
 
-# собирает все данные 1 страницы сайта с лимитом - первые 10
+# собирает все данные 1 страницы сайта с лимитом - первые 5
 def all_data_parser_from_drom(html):
     if html:
         soup = BeautifulSoup(html, 'html.parser')
         all_data = soup.find('div', class_='css-1nvf6xk').findAll('div', class_='css-1f68fiz', limit=5)
         return all_data
     return False
-
 
 def get_data_from_drom():
     html = get_html(Config.DATASET_URL)
