@@ -1,15 +1,17 @@
 from flask import Flask
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 from flask_migrate import Migrate
-from webapp.db import db
 from flask import render_template, flash, redirect, url_for, request
+
 from urllib.parse import urlsplit
-from webapp.forms import LoginForm
-from flask_login import current_user, login_user, logout_user, login_required
-import sqlalchemy as sa
+
+from webapp.db import db
 from webapp.models import User, Parser, ResultParser
-from webapp.forms import RegistrationForm
 from webapp.forms import AddParsingForm
+from webapp.forms import LoginForm
+from webapp.forms import RegistrationForm
+
+import sqlalchemy as sa
 
 
 def create_app():
@@ -27,8 +29,8 @@ def create_app():
     def load_user(user_id):
         return User.query.get(user_id)
 
+
     @app.route('/')
-    @app.route('/index')
     def index():
         return render_template('index.html', the_title='Парсим легко!')
 
@@ -97,13 +99,14 @@ def create_app():
         return render_template('get_data_site.html', page_title = title, result_parsing = result_parsing)
 
 
-    # @app.route("/administrator")
-    # @login_required
-    # def admin_index():
-    #     if current_user.is_admin:
-    #         return 'Привет, админ!'
-    #     else:
-    #         return 'Ты не админ!'
+    @app.route("/administrator")
+    @login_required
+    def admin_index():
+        if current_user.is_admin:
+            return 'Привет, админ!'
+        else:
+            return 'Ты не админ!'
+
 
     return app
 
