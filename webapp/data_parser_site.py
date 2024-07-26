@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-from webapp import config
+from webapp.config import Config
 from webapp.models import db, ResultParser
 
 
@@ -25,7 +25,7 @@ def all_data_parser_from_drom(html):
     return False
 
 def get_data_from_drom():
-    html = get_html(config.DATASET_URL)
+    html = get_html(Config.DATASET_URL)
     for data in all_data_parser_from_drom(html):
         if data.find('h3', class_='css-16kqa8y'):
             name = data.find('h3', class_='css-16kqa8y').contents[0]

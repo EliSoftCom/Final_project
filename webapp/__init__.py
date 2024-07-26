@@ -6,6 +6,7 @@ from flask import render_template, flash, redirect, url_for, request
 from urllib.parse import urlsplit
 
 from webapp.db import db
+from webapp.config import Config
 from webapp.models import User, Parser, ResultParser
 from webapp.forms import AddParsingForm
 from webapp.forms import LoginForm
@@ -16,7 +17,7 @@ import sqlalchemy as sa
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_pyfile('config.py')
+    app.config.from_object(Config)
     db.init_app(app)
     migrate = Migrate(app, db)
 
